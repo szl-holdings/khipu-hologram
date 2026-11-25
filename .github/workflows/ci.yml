@@ -1,0 +1,17 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  docs-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify core docs present and non-empty
+        run: |
+          test -s README.md
+          test -s PROVENANCE.md
+          echo "docs-smoke ok: README.md and PROVENANCE.md present"
